@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mbigger.sigar.mapper.UserMapper">
+    <resultMap id="UserResultMap" type="com.mbigger.sigar.bean.User">
+        <id column="id" jdbcType="VARCHAR" property="id"></id>
+        <result column="username" jdbcType="VARCHAR" property="username" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+    </resultMap>
+
+    <insert id="registerUser" parameterType="com.mbigger.sigar.bean.User">
+        INSERT INTO
+        login(id,username,password)
+        VALUES (#{id},#{username},#{password})
+    </insert>
+
+    <select id="login"  parameterType="com.mbigger.sigar.bean.User" resultMap="UserResultMap">
+        SELECT * FROM login WHERE (username = #{username} AND password = #{password})
+    </select>
+
+    <select id="registerJudge"  parameterType="com.mbigger.sigar.bean.User" resultMap="UserResultMap">
+        SELECT * FROM login WHERE username = #{username}
+    </select>
+
+</mapper>

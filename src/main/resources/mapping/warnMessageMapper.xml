@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mbigger.sigar.mapper.WarnMessageMapper">
+
+    <resultMap id="WarnMessageResultMap" type="com.mbigger.sigar.bean.WarnMessage">
+        <id column="id" jdbcType="VARCHAR" property="id"></id>
+        <result column="content" jdbcType="VARCHAR" property="content" />
+        <result column="host" jdbcType="VARCHAR" property="host" />
+        <result column="ifread" jdbcType="VARCHAR" property="ifread" />
+        <result column="rank" jdbcType="VARCHAR" property="rank" />
+        <result column="time" jdbcType="VARCHAR" property="time" />
+    </resultMap>
+
+    <insert id="generateWarnMge" parameterType="com.mbigger.sigar.bean.WarnMessage">
+        INSERT INTO
+        message(id, content, host, ifread, rank, time)
+        Values (#{id},#{content},#{host},#{ifread},#{rank},#{time})
+    </insert>
+
+    <insert id="startStrategy" parameterType="com.mbigger.sigar.bean.WarnMessage">
+        INSERT INTO
+        message(id, content, host, ifread, rank, time)
+        Values (#{id},#{content},#{host},#{ifread},#{rank},#{time})
+    </insert>
+
+    <select id="findAllunReadMsg" parameterType="com.mbigger.sigar.bean.WarnMessage" resultMap="WarnMessageResultMap">
+        SELECT * FROM message WHERE ifread = #{ifread}
+    </select>
+
+    <select id="findAllReadMsg" parameterType="com.mbigger.sigar.bean.WarnMessage" resultMap="WarnMessageResultMap">
+        SELECT * FROM message WHERE ifread = #{ifread}
+    </select>
+
+    <select id="findAllMsg" parameterType="com.mbigger.sigar.bean.WarnMessage" resultMap="WarnMessageResultMap">
+        SELECT * FROM message
+    </select>
+
+    <update id="updateMsgtoRead" parameterType="com.mbigger.sigar.bean.WarnMessage" >
+        UPDATE message SET ifread = #{ifread} WHERE id = #{id}
+    </update>
+
+    <delete id="deleteMsgById" parameterType="com.mbigger.sigar.bean.WarnMessage" >
+        DELETE FROM message WHERE id = #{id}
+    </delete>
+
+    <delete id="deleteAllRead" parameterType="com.mbigger.sigar.bean.WarnMessage" >
+        DELETE FROM message WHERE ifread = #{ifread}
+    </delete>
+
+</mapper>

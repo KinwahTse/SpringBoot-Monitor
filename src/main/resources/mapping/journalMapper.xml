@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mbigger.sigar.mapper.JournalMapper">
+    <resultMap id="JournalResultMap" type="com.mbigger.sigar.bean.Journal">
+        <id column="id" jdbcType="VARCHAR" property="id"></id>
+        <result column="username" jdbcType="VARCHAR" property="username" />
+        <result column="operation" jdbcType="VARCHAR" property="operation" />
+        <result column="power" jdbcType="VARCHAR" property="power" />
+        <result column="time"  jdbcType="VARCHAR" property="time" />
+    </resultMap>
+
+    <insert id="insertJournal" parameterType="com.mbigger.sigar.bean.Journal">
+        INSERT INTO
+        journal(id,username,operation,power,time)
+        VALUES (#{id},#{username},#{operation},#{power},#{time})
+    </insert>
+
+    <select id="findAllJournal" resultType="com.mbigger.sigar.bean.Journal" resultMap="JournalResultMap">
+            select * from journal
+    </select>
+</mapper>
